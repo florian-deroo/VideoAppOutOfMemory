@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.florianfrdev.VideoAppOutOfMemory"
     },
     "web": {
       "bundler": "metro",
@@ -27,10 +28,16 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-video"
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b8c5e8f7-fc58-47e4-b8bf-e69e6ce298c2"
+      }
     }
   }
 }

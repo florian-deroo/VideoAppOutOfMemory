@@ -1,37 +1,53 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
 import 'react-native-reanimated';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+import {ScrollView, View} from "react-native";
+import {useVideoPlayer, VideoView} from "expo-video";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
+    const videoSource =
+        'https://res.cloudinary.com/shotgun/video/upload/v1699355465/staging/artworks/afterlife-video_sjy9ic.mov';
 
-  if (!loaded) {
-    return null;
-  }
 
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
-  );
+    const player = useVideoPlayer(videoSource, player => {
+        player.loop = true;
+        player.play();
+    });
+    const player2 = useVideoPlayer(videoSource, player => {
+        player.loop = true;
+        player.play();
+    });
+    const player3 = useVideoPlayer(videoSource, player => {
+        player.loop = true;
+        player.play();
+    });
+    const player4 = useVideoPlayer(videoSource, player => {
+        player.loop = true;
+        player.play();
+    });
+
+    return (
+        <ScrollView style={{
+            flex: 1
+        }}>
+            <VideoView
+                nativeControls={true}
+                style={{width: '100%', height: 200}}
+                player={player}
+
+            /><VideoView
+            nativeControls={true}
+            style={{width: '100%', height: 200}}
+            player={player2}
+        /><VideoView
+            nativeControls={true}
+            style={{width: '100%', height: 200}}
+            player={player3}
+        /><VideoView
+            style={{width: '100%', height: 200}}
+            player={player4}
+        />
+        </ScrollView>
+
+    );
 }
